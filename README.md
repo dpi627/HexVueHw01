@@ -95,7 +95,7 @@ const students = ref([
 ## BMI
 
 <details>
-    <summary>詳細資料</summary>
+    <summary>範例程式</summary>
 
 ```html
 <script setup>
@@ -303,7 +303,7 @@ button:disabled {
 ## Count
 
 <details>
-<summary>詳細資料</summary>
+<summary>範例程式</summary>
 
 ```html
 <script setup>
@@ -522,10 +522,82 @@ function getTotalSpent() {
 
 | 特性 | Computed | Method |
 |--------|-------|-------|
-| **模板使用** | 直接使用 `{{ variable }}` | 需加 `()` `{{ getData() }}` |
+| **模板** | 直接使用 `{{ variable }}` | 需加 `()` `{{ getData() }}` |
 | **快取**  | 有，資料沒變重用結果 | 無，每次都重新執行|
 | **性能**  | 高，適合多次使用或複雜計算 | 低，多次調用可能導致性能問題 |
-| **適用場景**        | 衍生資料，如計算餘款、格式化數據 | 適合做「觸發動作」：如 按鈕事件、API 呼叫 |
+| **適用場景** | 衍生資料，如計算餘款、格式化數據 | 適合做「觸發動作」：如 按鈕事件、API 呼叫 |
 
+## v-model
+
+<details>
+<summary>範例程式</summary>
+
+```html
+<template>
+    <h1>待辦事項</h1>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>待辦事項</th>
+          <th>到期日</th>
+          <th>已完成</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="todo in todos" :key="todo.name">
+          <td v-text="todo.name"></td>
+          <td v-html="formatDueDate(todo.dueDate)"></td>
+          <td>{{ todo.completed ? '是' : '否' }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h1>新增 (v-model 雙向綁定)</h1>
+    <div>
+      <input v-model="newTodoName" placeholder="新增待辦事項" />
+      <input v-model="newTodoDueDate" type="date" />
+      <button @click="addTodo">新增</button>
+    </div>
+</template>
+
+<script setup>
+import { ref, computed } from 'vue';
+
+const todos = ref([
+  { name: '購買雜貨', dueDate: '2024-07-30', completed: true },
+  { name: '完成報告', dueDate: '2024-08-01', completed: false },
+  { name: '清理房間', dueDate: '2024-07-28', completed: true }
+]);
+
+const newTodoName = ref('');
+const newTodoDueDate = ref('');
+
+// 格式化到期日（模擬 HTML 渲染）
+const formatDueDate = (date) => {
+  return `<span style="color: #336699;">${date}</span>`;
+};
+
+// 新增待辦事項
+const addTodo = () => {
+  if (newTodoName.value && newTodoDueDate.value) {
+    todos.value.push({
+      name: newTodoName.value,
+      dueDate: newTodoDueDate.value,
+      completed: false,
+    });
+    newTodoName.value = '';
+    newTodoDueDate.value = '';
+  }
+};
+</script>
+```
+
+</details>
+
+如果以 `MVVM` 比喻
+
+- `todos` 集合的單筆資料結構就是 `Model`
+- `<template>` 自然就是 `View`
+- `<script setup>` 基本上可類比為 `ViewModel`
 
 # Homework
