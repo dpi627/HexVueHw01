@@ -21,15 +21,15 @@ https://hackmd.io/o-BW3WhjRWOJjCUfqJ4YJg
 
 ## 常用指令
 
-|Directive|Description|
-|:-:|-|
-|`v-text`|等同 `{{}}` 但可避免閃爍|
-|`v-html`|渲染原始 HTML，要注意 XSS|
-|`v-once`|渲染靜態內容，單次綁定|
-|`v-bind`|縮寫 `:` 綁定 HTML Attribute|
-|`v-on`|縮寫 `@` addEventListener|
-|`v-for`|迴圈，建議搭配 `:key="item.id"`|
-|`v-if` `v-else`|邏輯判斷|
+|    Directive    | Description                     |
+| :-------------: | ------------------------------- |
+|    `v-text`     | 等同 `{{}}` 但可避免閃爍        |
+|    `v-html`     | 渲染原始 HTML，要注意 XSS       |
+|    `v-once`     | 渲染靜態內容，單次綁定          |
+|    `v-bind`     | 縮寫 `:` 綁定 HTML Attribute    |
+|     `v-on`      | 縮寫 `@` addEventListener       |
+|     `v-for`     | 迴圈，建議搭配 `:key="item.id"` |
+| `v-if` `v-else` | 邏輯判斷                        |
 
 > [!CAUTION]
 > `v-html` 可渲染 HTML 標籤，其中也包含了 `<script`，所以要特別注意 XSS（Cross-Site Scripting）攻擊
@@ -520,11 +520,11 @@ function getTotalSpent() {
 </template>
 ```
 
-| 特性 | Computed | Method |
-|--------|-------|-------|
-| **模板** | 直接使用 `{{ variable }}` | 需加 `()` `{{ getData() }}` |
-| **快取**  | 有，資料沒變重用結果 | 無，每次都重新執行|
-| **性能**  | 高，適合多次使用或複雜計算 | 低，多次調用可能導致性能問題 |
+| 特性         | Computed                         | Method                                    |
+| ------------ | -------------------------------- | ----------------------------------------- |
+| **模板**     | 直接使用 `{{ variable }}`        | 需加 `()` `{{ getData() }}`               |
+| **快取**     | 有，資料沒變重用結果             | 無，每次都重新執行                        |
+| **性能**     | 高，適合多次使用或複雜計算       | 低，多次調用可能導致性能問題              |
 | **適用場景** | 衍生資料，如計算餘款、格式化數據 | 適合做「觸發動作」：如 按鈕事件、API 呼叫 |
 
 ## v-model
@@ -729,6 +729,26 @@ const items = ref([
 
 </details>
 
-## Level 2
+<details>
+<summary>Level 2 可編輯庫存 (庫存不低於零)</summary>
 
-## Level 3
+```html
+<template>
+  <!-- skip code -->
+  <td>
+    <button @click="decreaseStock(item)">-</button>
+    {{ item.stock }}
+    <button @click="increaseStock(item)">+</button>
+  </td>
+  <!-- skip code -->
+</template>
+
+<script setup>
+  // 增加庫存
+  const increaseStock = (item) => { item.stock++ };
+  // 減少庫存，不低於零
+  const decreaseStock = (item) => { if (item.stock > 0) item.stock-- };
+</script>
+```
+
+</details>
