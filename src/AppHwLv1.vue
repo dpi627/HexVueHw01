@@ -13,7 +13,12 @@
     <tbody>
       <tr v-for="(item, index) in items" :key="index">
         <td>{{ index + 1 }}</td>
-        <td>{{ item.name }}</td>
+        <td>
+          <span v-if="editingItem !== item">
+            {{ item.name }}
+          </span>
+          <input v-else v-model="editingName" />
+        </td>
         <td><small>{{ item.description }}</small></td>
         <td>{{ item.price }}</td>
         <td>
@@ -22,7 +27,11 @@
           <button @click="increaseStock(item)">+</button>
         </td>
         <td>
-          <button>編輯</button>
+          <button v-if="editingItem !== item" @click="startEdit(item)">編輯</button>
+          <div v-else>
+            <button @click="confirmEdit()">確認</button>
+            <button @click="cancelEdit()">取消</button>
+          </div>
         </td>
       </tr>
     </tbody>
@@ -31,6 +40,33 @@
 
 <script setup>
 import { ref } from 'vue';
+
+// 編輯相關資料狀態
+const editingItem = ref(null);
+const editingName = ref('');
+
+// 開始編輯
+const startEdit = (item) => {
+  editingItem.value = item;
+  editingName.value = item.name;
+};
+
+// 確認編輯狀態
+const confirmEdit = () => {
+  if (editingName.value.trim() !== '') {
+    editingItem.value.name = editingName.value.trim();
+  }
+  else {
+    alert('品項名稱不能為空，請重新操作');
+  }
+  cancelEdit();
+};
+
+// 取消編輯
+const cancelEdit = () => {
+  editingItem.value = null;
+  editingName.value = '';
+};
 
 const increaseStock = (item) => { item.stock++ };
 const decreaseStock = (item) => { if (item.stock > 0) item.stock-- };
