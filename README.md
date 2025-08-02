@@ -752,3 +752,58 @@ const items = ref([
 ```
 
 </details>
+
+<details>
+<summary>Level 3 新增欄位 "編輯"，按下 "確認" 修改名稱</summary>
+
+```html
+<template>
+  <!-- skip code -->
+  <td>
+    <span v-if="editingItem !== item">
+      {{ item.name }}
+    </span>
+    <input v-else v-model="editingName" />
+  </td>
+  <!-- skip code -->
+  <td>
+    <button v-if="editingItem !== item" @click="startEdit(item)">編輯</button>
+    <div v-else>
+      <button @click="confirmEdit()">確認</button>
+      <button @click="cancelEdit()">取消</button>
+    </div>
+  </td>
+  <!-- skip code -->
+</template>
+
+<script setup>
+// 編輯相關資料狀態
+const editingItem = ref(null);
+const editingName = ref('');
+
+// 開始編輯
+const startEdit = (item) => {
+  editingItem.value = item;
+  editingName.value = item.name;
+};
+
+// 確認編輯狀態
+const confirmEdit = () => {
+  if (editingName.value.trim() !== '') {
+    editingItem.value.name = editingName.value.trim();
+  }
+  else {
+    alert('品項名稱不能為空，請重新操作');
+  }
+  cancelEdit();
+};
+
+// 取消編輯
+const cancelEdit = () => {
+  editingItem.value = null;
+  editingName.value = '';
+};
+</script>
+```
+
+</details>
