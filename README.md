@@ -31,6 +31,11 @@ https://hackmd.io/o-BW3WhjRWOJjCUfqJ4YJg
 |`v-on`|addEventListener|
 |`v-if` `v-else`|邏輯判斷|
 
+> [!CAUTION]
+> `v-html` 可渲染 HTML 標籤，也包含了 `<script`，所以要特別注意 XSS（Cross-Site Scripting）攻擊
+
 # In-Class Exercise
+
+
 
 # Homework
