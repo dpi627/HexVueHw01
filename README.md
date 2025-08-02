@@ -26,9 +26,9 @@ https://hackmd.io/o-BW3WhjRWOJjCUfqJ4YJg
 |`v-text`|等同 `{{}}` 但可避免閃爍|
 |`v-html`|渲染原始 HTML，要注意 XSS|
 |`v-once`|渲染靜態內容，單次綁定|
-|`v-bind`|綁定 HTML Attribute|
+|`v-bind`|縮寫 `:` 綁定 HTML Attribute|
+|`v-on`|縮寫 `@` addEventListener|
 |`v-for`|迴圈|
-|`v-on`|addEventListener|
 |`v-if` `v-else`|邏輯判斷|
 
 > [!CAUTION]
