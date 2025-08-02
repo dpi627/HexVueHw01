@@ -89,6 +89,9 @@ const students = ref([
 </template>
 ```
 
+> [!NOTE]
+> 執行範例的時候，可建立一個 `AppXXX.vue` 貼上程式，然後修改 `main.js`
+
 ## BMI
 
 <details>
