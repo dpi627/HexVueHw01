@@ -28,7 +28,7 @@ https://hackmd.io/o-BW3WhjRWOJjCUfqJ4YJg
 |`v-once`|渲染靜態內容，單次綁定|
 |`v-bind`|縮寫 `:` 綁定 HTML Attribute|
 |`v-on`|縮寫 `@` addEventListener|
-|`v-for`|迴圈|
+|`v-for`|迴圈，建議搭配 `:key="item.id"`|
 |`v-if` `v-else`|邏輯判斷|
 
 > [!CAUTION]
