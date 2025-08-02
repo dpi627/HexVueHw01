@@ -680,7 +680,7 @@ const addTodo = () => {
   </tbody>
 </table>
 ```
-</detail>
+</details>
 
 ## 實作
 
