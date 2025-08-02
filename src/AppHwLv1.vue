@@ -12,10 +12,14 @@
     <tbody>
       <tr v-for="item in items" :key="item.id">
         <td>{{ item.id }}</td>
-        <td>{{ item.name}}</td>
-        <td><small>{{ item.description}}</small></td>
-        <td>{{ item.price}}</td>
-        <td><button>-</button>{{ item.stock }}<button>+</button></td>
+        <td>{{ item.name }}</td>
+        <td><small>{{ item.description }}</small></td>
+        <td>{{ item.price }}</td>
+        <td>
+          <button @click="decreaseStock(item)">-</button>
+          {{ item.stock }}
+          <button @click="increaseStock(item)">+</button>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -23,6 +27,9 @@
 
 <script setup>
 import { ref } from 'vue';
+
+const increaseStock = (item) => { item.stock++ };
+const decreaseStock = (item) => { if (item.stock > 0) item.stock-- };
 
 const items = ref([
   { id: 1, name: '珍珠奶茶', description: '香濃奶茶搭配QQ珍珠', price: 50, stock: 20 },
