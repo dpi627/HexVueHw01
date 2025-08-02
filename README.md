@@ -36,7 +36,7 @@ https://hackmd.io/o-BW3WhjRWOJjCUfqJ4YJg
 
 # In-Class Exercise
 
-> 執行 `npm run dev` 之前記得先執行 `npm install`
+> 💡執行 `npm run dev` 之前記得先執行 `npm install`
 
 ## Quick Demo
 
@@ -300,7 +300,7 @@ button:disabled {
 ```
 </details>
 
-## Count
+## Literal Count
 
 <details>
 <summary>範例程式</summary>
@@ -601,3 +601,84 @@ const addTodo = () => {
 - `<script setup>` 基本上可類比為 `ViewModel`
 
 # Homework
+
+## 餐點管理
+
+- Level 1：將菜單轉為資料格式
+- Level 2：可以重新設定菜單的庫存數量
+- Level 3（挑戰）：可以重新設定品項名稱
+
+## 作業需求：
+
+- 將以下的表格轉為使用資料，並使用 Vue 進行渲染。
+- 數量的部分可以點擊，並且調整庫存數量。
+- 庫存數量不會低於 0。
+- 新增欄位 “編輯”，按下後可以修改該欄位的品項名稱（按下確認後執行更換）
+
+<details>
+<summary>原始程式碼(未拆版)</summary>
+
+```html
+<table>
+  <thead>
+    <tr>
+      <th scope="col">品項</th>
+      <th scope="col">描述</th>
+      <th scope="col">價格</th>
+      <th scope="col">庫存</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>珍珠奶茶</td>
+      <td><small>香濃奶茶搭配QQ珍珠</small></td>
+      <td>50</td>
+      <td><button>-</button>20<button>+</button></td>
+    </tr>
+    <tr>
+      <td>冬瓜檸檬</td>
+      <td><small>清新冬瓜配上新鮮檸檬</small></td>
+      <td>45</td>
+      <td><button>-</button>18<button>+</button></td>
+    </tr>
+    <tr>
+      <td>翡翠檸檬</td>
+      <td><small>綠茶與檸檬的完美結合</small></td>
+      <td>55</td>
+      <td><button>-</button>34<button>+</button></td>
+    </tr>
+    <tr>
+      <td>四季春茶</td>
+      <td><small>香醇四季春茶，回甘無比</small></td>
+      <td>45</td>
+      <td><button>-</button>10<button>+</button></td>
+    </tr>
+    <tr>
+      <td>阿薩姆奶茶</td>
+      <td><small>阿薩姆紅茶搭配香醇鮮奶</small></td>
+      <td>50</td>
+      <td><button>-</button>25<button>+</button></td>
+    </tr>
+    <tr>
+      <td>檸檬冰茶</td>
+      <td><small>檸檬與冰茶的清新組合</small></td>
+      <td>45</td>
+      <td><button>-</button>20<button>+</button></td>
+    </tr>
+    <tr>
+      <td>芒果綠茶</td>
+      <td><small>芒果與綠茶的獨特風味</small></td>
+      <td>55</td>
+      <td><button>-</button>18<button>+</button></td>
+    </tr>
+    <tr>
+      <td>抹茶拿鐵</td>
+      <td><small>抹茶與鮮奶的絕配</small></td>
+      <td>60</td>
+      <td><button>-</button>20<button>+</button></td>
+    </tr>
+  </tbody>
+</table>
+```
+
+</detail>
