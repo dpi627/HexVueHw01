@@ -11,7 +11,7 @@ https://hackmd.io/o-BW3WhjRWOJjCUfqJ4YJg
 
 ## `*.vue` 結構
 
-```xml
+```html
 <script setup>...</script>
 
 <template>...</template>
@@ -32,10 +32,38 @@ https://hackmd.io/o-BW3WhjRWOJjCUfqJ4YJg
 |`v-if` `v-else`|邏輯判斷|
 
 > [!CAUTION]
-> `v-html` 可渲染 HTML 標籤，也包含了 `<script`，所以要特別注意 XSS（Cross-Site Scripting）攻擊
+> `v-html` 可渲染 HTML 標籤，其中也包含了 `<script`，所以要特別注意 XSS（Cross-Site Scripting）攻擊
 
 # In-Class Exercise
 
+> 執行 `npm run dev` 之前記得先執行 `npm install`
 
+## Quick Demo
+
+```html
+<script setup>
+import { ref } from 'vue'
+
+const inputValue = ref(1)
+const rawHTML = ref('<span style="color: red;">這是一段 HTML</span>')
+function showValue() {
+  alert(`你輸入的是：${inputValue.value}`)
+}
+</script>
+
+<template>
+  <input v-bind:value="inputValue" type="text" />
+  <p>目前輸入：{{ inputValue }}</p>
+  <p v-text="inputValue"></p>
+  <p v-once>目前輸入：{{ inputValue }} (單向綁定)</p>
+  <p v-html="rawHTML"></p>
+  
+  <button v-on:click="showValue">
+    顯示輸入值
+  </button>
+</template>
+
+<style></style>
+```
 
 # Homework
