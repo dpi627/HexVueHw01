@@ -19,19 +19,19 @@
           <span v-if="editingItem !== item">
             {{ item.name }}
           </span>
-          <input v-else v-model="editingName" />
+          <input v-else v-model="editingName" style="width: 90%;" />
         </td>
         <td>
           <span v-if="editingItem !== item">
           <small>{{ item.description }}</small>
           </span>
-          <input v-else v-model="editingDescription" />
+          <input v-else v-model="editingDescription" style="width: 90%;" />
         </td>
         <td>
           <span v-if="editingItem !== item">
             {{ item.price }} 元
           </span>
-          <input v-else v-model.number="editingPrice" type="number" />
+          <input v-else v-model.number="editingPrice" style="width: 90%;" type="number" />
         </td>
         <td>
           <button @click="decreaseStock(item)">-</button>
@@ -179,7 +179,8 @@ const confirmEdit = () => {
     editingItem.value.description = editingDescription.value.trim();
   }
   else {
-    alert('品項名稱或描述不能為空，請重新操作');
+    alert('品項名稱或描述不能為空');
+    return;
   }
 
   if (editingPrice.value > 0) {
@@ -188,8 +189,6 @@ const confirmEdit = () => {
     alert('價格必須大於 0');
     return;
   }
-
-  cancelEdit();
 };
 
 // 取消編輯
