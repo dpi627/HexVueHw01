@@ -2,6 +2,7 @@
   <!-- 商品列表區塊 -->
   <div class="container mt-3">
     <h5 class="mb-2">商品列表</h5>
+    <div class="table-responsive rounded-3">
     <table class="table table-striped table-hover align-middle">
       <thead class="table-dark">
         <tr>
@@ -35,9 +36,9 @@
             <input v-else v-model.number="editingPrice" class="form-control" type="number" />
           </td>
           <td>
-            <button @click="decreaseStock(item)" class="btn btn-sm btn-outline-primary">-</button>
+            <button @click="decreaseStock(item)" class="btn btn-sm btn-primary btn-font">-</button>
             {{ formatNumber(item.stock) }}
-            <button @click="increaseStock(item)" class="btn btn-sm btn-outline-primary">+</button>
+            <button @click="increaseStock(item)" class="btn btn-sm btn-primary btn-font">+</button>
           </td>
           <td>
             <button v-if="editingItem !== item" @click="startEdit(item)" class="btn btn-warning me-2">編輯</button>
@@ -50,9 +51,11 @@
         </tr>
       </tbody>
     </table>
+    </div>
 
     <!-- 新增區塊 -->
     <h5 class="mb-2 mt-3">新增商品</h5>
+    <div class="table-responsive rounded-3">
     <table class="table table-striped table-hover">
       <thead class="table-dark">
         <tr>
@@ -99,6 +102,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
   </div>
 </template>
 
@@ -241,5 +245,10 @@ td {
   /* 讓所有表格內容置中 */
   padding: 8px;
   border: 1px solid #ddd;
+}
+
+.btn-font {
+  font-size: 0.9rem;
+  font-family: Consolas;
 }
 </style>
