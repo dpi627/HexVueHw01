@@ -1,13 +1,15 @@
 <template>
+  <!-- 商品列表區塊 -->
+  <h3>商品列表</h3>
   <table>
     <thead>
       <tr>
         <th width="5%" scope="col">#</th>
-        <th width="25%" scope="col">品項</th>
-        <th width="25%" scope="col">描述</th>
+        <th width="30%" scope="col">品項</th>
+        <th width="30%" scope="col">描述</th>
         <th width="10%" scope="col">價格</th>
         <th width="10%" scope="col">庫存</th>
-        <th width="10%" scope="col">操作</th>
+        <th width="15%" scope="col">操作</th>
       </tr>
     </thead>
     <tbody>
@@ -36,6 +38,43 @@
       </tr>
     </tbody>
   </table>
+
+  <!-- 新增區塊 -->
+  <h3>新增商品</h3>
+  <table>
+    <thead>
+      <tr>
+        <th width="5%" scope="col"></th>
+        <th width="30%" scope="col">品項</th>
+        <th width="30%" scope="col">描述</th>
+        <th width="10%" scope="col">價格</th>
+        <th width="10%" scope="col">庫存</th>
+        <th width="15%" scope="col">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+        <td>
+          <input v-model="newItem.name" style="width: 90%;" placeholder="品項名稱" />
+        </td>
+        <td>
+          <input v-model="newItem.description" style="width: 90%;" placeholder="商品描述" />
+        </td>
+        <td>
+          <input v-model.number="newItem.price" style="width: 90%;" type="number" placeholder="價格" />
+        </td>
+        <td>
+          <input v-model.number="newItem.stock" style="width: 90%;" type="number" placeholder="庫存" />
+        </td>
+        <td>
+          <button @click="addItem">新增</button>
+          <button @click="clearForm">清空</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
 </template>
 
 <script setup>
@@ -44,6 +83,57 @@ import { ref } from 'vue';
 // 編輯相關資料狀態
 const editingItem = ref(null);
 const editingName = ref('');
+
+// 新增商品的表單資料
+const newItem = ref({
+  name: '',
+  description: '',
+  price: 0,
+  stock: 0
+});
+
+// 新增商品
+const addItem = () => {
+  // 驗證必填欄位
+  if (!newItem.value.name.trim()) {
+    alert('請輸入品項名稱');
+    return;
+  }
+  if (!newItem.value.description.trim()) {
+    alert('請輸入商品描述');
+    return;
+  }
+  if (newItem.value.price <= 0) {
+    alert('價格必須大於 0');
+    return;
+  }
+  if (newItem.value.stock < 0) {
+    alert('庫存不能為負數');
+    return;
+  }
+
+  // 新增到商品列表
+  items.value.push({
+    name: newItem.value.name.trim(),
+    description: newItem.value.description.trim(),
+    price: newItem.value.price,
+    stock: newItem.value.stock
+  });
+
+  // 清空表單
+  clearForm();
+  alert('商品新增成功！');
+};
+
+// 清空表單
+const clearForm = () => {
+  newItem.value = {
+    name: '',
+    description: '',
+    price: 0,
+    stock: 0
+  };
+};
 
 // 數字格式化函數
 const formatNumber = (num) => {
@@ -92,11 +182,14 @@ const items = ref([
 table {
   width: 100%;
   border-collapse: collapse;
-  margin: 0 auto; /* 讓表格本身置中 */
+  margin: 0 auto;
+  /* 讓表格本身置中 */
 }
 
-th, td {
-  text-align: center; /* 讓所有表格內容置中 */
+th,
+td {
+  text-align: center;
+  /* 讓所有表格內容置中 */
   padding: 8px;
   border: 1px solid #ddd;
 }
