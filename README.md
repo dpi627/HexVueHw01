@@ -807,3 +807,10 @@ const cancelEdit = () => {
 ```
 
 </details>
+
+### Additional Features
+
+- Add new item
+- Delete item
+- Integrate Bootstrap
+- Minimal layout design
