@@ -1,3 +1,16 @@
+
+![](https://img.shields.io/badge/Node.js-24-5FA04E?logo=nodedotjs)
+![](https://img.shields.io/badge/npm-11-CB3837?logo=npm)
+![](https://img.shields.io/badge/Vite-7-646CFF?logo=vite)
+![](https://img.shields.io/badge/Vue-3-4FC08D?logo=vuedotjs)
+![](https://img.shields.io/badge/HTML-5-E34F26?logo=html5)
+![](https://img.shields.io/badge/JavaScript-ES6-F7DF1E?logo=javascript)
+![](https://img.shields.io/badge/CSS-3-663399?logo=css)
+![](https://img.shields.io/badge/Bootstrap-5-7952B3?logo=bootstrap)
+![](https://img.shields.io/badge/GitHub-181717?logo=github)
+![](https://img.shields.io/badge/Git-555?logo=git)
+
+
 # HEX Vue3 Bootcamp Week 1
 
 https://hackmd.io/o-BW3WhjRWOJjCUfqJ4YJg
