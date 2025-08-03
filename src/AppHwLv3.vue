@@ -21,7 +21,12 @@
           </span>
           <input v-else v-model="editingName" />
         </td>
-        <td><small>{{ item.description }}</small></td>
+        <td>
+          <span v-if="editingItem !== item">
+          <small>{{ item.description }}</small>
+          </span>
+          <input v-else v-model="editingDescription" />
+        </td>
         <td>{{ item.price }}</td>
         <td>
           <button @click="decreaseStock(item)">-</button>
@@ -85,6 +90,7 @@ import { ref } from 'vue';
 // 編輯相關資料狀態
 const editingItem = ref(null);
 const editingName = ref('');
+const editingDescription = ref('');
 
 // 新增商品的表單資料
 const newItem = ref({
@@ -155,15 +161,18 @@ const formatNumber = (num) => {
 const startEdit = (item) => {
   editingItem.value = item;
   editingName.value = item.name;
+  editingDescription.value = item.description;
 };
 
 // 確認編輯狀態
 const confirmEdit = () => {
-  if (editingName.value.trim() !== '') {
+  if (editingName.value.trim() !== '' &&
+      editingDescription.value.trim() !== '') {
     editingItem.value.name = editingName.value.trim();
+    editingItem.value.description = editingDescription.value.trim();
   }
   else {
-    alert('品項名稱不能為空，請重新操作');
+    alert('品項名稱或描述不能為空，請重新操作');
   }
   cancelEdit();
 };
@@ -172,6 +181,7 @@ const confirmEdit = () => {
 const cancelEdit = () => {
   editingItem.value = null;
   editingName.value = '';
+  editingDescription.value = '';
 };
 
 const increaseStock = (item) => { item.stock++ };
