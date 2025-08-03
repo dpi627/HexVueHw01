@@ -30,6 +30,7 @@
         </td>
         <td>
           <button v-if="editingItem !== item" @click="startEdit(item)">編輯</button>
+          <button v-if="editingItem !== item" @click="deleteItem(item)">刪除</button>
           <div v-else>
             <button @click="confirmEdit()">確認</button>
             <button @click="cancelEdit()">取消</button>
@@ -62,6 +63,7 @@
           <input v-model="newItem.description" style="width: 90%;" placeholder="商品描述" />
         </td>
         <td>
+          <!-- .number 修飾符（modifier）將輸入的字串轉換為數字類型 -->
           <input v-model.number="newItem.price" style="width: 90%;" type="number" placeholder="價格" />
         </td>
         <td>
@@ -122,7 +124,6 @@ const addItem = () => {
 
   // 清空表單
   clearForm();
-  alert('商品新增成功！');
 };
 
 // 清空表單
@@ -133,6 +134,16 @@ const clearForm = () => {
     price: 0,
     stock: 0
   };
+};
+
+// 刪除商品
+const deleteItem = (item) => {
+  const isDelete = confirm(`確定刪除「${item.name}」？`);
+
+  if (isDelete) {
+    // 直接過濾掉要刪除的項目
+    items.value = items.value.filter(i => i !== item);
+  }
 };
 
 // 數字格式化函數
