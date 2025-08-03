@@ -82,3 +82,17 @@ const items = ref([
   { name: '抹茶拿鐵', description: '抹茶與鮮奶的絕配', price: 60, stock: 20 }
 ]);
 </script>
+
+<style scoped>
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto; /* 讓表格本身置中 */
+}
+
+th, td {
+  text-align: center; /* 讓所有表格內容置中 */
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+</style>
