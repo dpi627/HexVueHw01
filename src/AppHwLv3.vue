@@ -1,92 +1,105 @@
 <template>
   <!-- 商品列表區塊 -->
-  <h3>商品列表</h3>
-  <table>
-    <thead>
-      <tr>
-        <th width="5%" scope="col">#</th>
-        <th width="30%" scope="col">品項</th>
-        <th width="30%" scope="col">描述</th>
-        <th width="10%" scope="col">價格</th>
-        <th width="10%" scope="col">庫存</th>
-        <th width="15%" scope="col">操作</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(item, index) in items" :key="index">
-        <td>{{ formatNumber(index + 1) }}</td>
-        <td>
-          <span v-if="editingItem !== item">
-            {{ item.name }}
-          </span>
-          <input v-else v-model="editingName" style="width: 90%;" />
-        </td>
-        <td>
-          <span v-if="editingItem !== item">
-          <small>{{ item.description }}</small>
-          </span>
-          <input v-else v-model="editingDescription" style="width: 90%;" />
-        </td>
-        <td>
-          <span v-if="editingItem !== item">
-            {{ item.price }} 元
-          </span>
-          <input v-else v-model.number="editingPrice" style="width: 90%;" type="number" />
-        </td>
-        <td>
-          <button @click="decreaseStock(item)">-</button>
-          {{ formatNumber(item.stock) }}
-          <button @click="increaseStock(item)">+</button>
-        </td>
-        <td>
-          <button v-if="editingItem !== item" @click="startEdit(item)">編輯</button>
-          <button v-if="editingItem !== item" @click="deleteItem(item)">刪除</button>
-          <div v-else>
-            <button @click="confirmEdit()">確認</button>
-            <button @click="cancelEdit()">取消</button>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="container mt-3">
+    <h5 class="mb-2">商品列表</h5>
+    <table class="table table-striped table-hover align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th width="5%" scope="col">#</th>
+          <th width="30%" scope="col">品項</th>
+          <th width="30%" scope="col">描述</th>
+          <th width="10%" scope="col">價格</th>
+          <th width="10%" scope="col">庫存</th>
+          <th width="15%" scope="col">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(item, index) in items" :key="index">
+          <td>{{ formatNumber(index + 1) }}</td>
+          <td>
+            <span v-if="editingItem !== item">
+              {{ item.name }}
+            </span>
+            <input v-else v-model="editingName" class="form-control" />
+          </td>
+          <td>
+            <span v-if="editingItem !== item">
+              <small>{{ item.description }}</small>
+            </span>
+            <input v-else v-model="editingDescription" class="form-control" />
+          </td>
+          <td>
+            <span v-if="editingItem !== item">
+              {{ item.price }} 元
+            </span>
+            <input v-else v-model.number="editingPrice" class="form-control" type="number" />
+          </td>
+          <td>
+            <button @click="decreaseStock(item)" class="btn btn-sm btn-outline-primary">-</button>
+            {{ formatNumber(item.stock) }}
+            <button @click="increaseStock(item)" class="btn btn-sm btn-outline-primary">+</button>
+          </td>
+          <td>
+            <button v-if="editingItem !== item" @click="startEdit(item)" class="btn btn-warning me-2">編輯</button>
+            <button v-if="editingItem !== item" @click="deleteItem(item)" class="btn btn-outline-danger">刪除</button>
+            <div v-else>
+              <button @click="confirmEdit()" class="btn btn-success me-2">確認</button>
+              <button @click="cancelEdit()" class="btn btn-outline-secondary">取消</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-  <!-- 新增區塊 -->
-  <h3>新增商品</h3>
-  <table>
-    <thead>
-      <tr>
-        <th width="5%" scope="col"></th>
-        <th width="30%" scope="col">品項</th>
-        <th width="30%" scope="col">描述</th>
-        <th width="10%" scope="col">價格</th>
-        <th width="10%" scope="col">庫存</th>
-        <th width="15%" scope="col">操作</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td></td>
-        <td>
-          <input v-model="newItem.name" style="width: 90%;" placeholder="品項名稱" />
-        </td>
-        <td>
-          <input v-model="newItem.description" style="width: 90%;" placeholder="商品描述" />
-        </td>
-        <td>
-          <!-- .number 修飾符（modifier）將輸入的字串轉換為數字類型 -->
-          <input v-model.number="newItem.price" style="width: 90%;" type="number" placeholder="價格" />
-        </td>
-        <td>
-          <input v-model.number="newItem.stock" style="width: 90%;" type="number" placeholder="庫存" />
-        </td>
-        <td>
-          <button @click="addItem">新增</button>
-          <button @click="clearForm">清空</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
+    <!-- 新增區塊 -->
+    <h5 class="mb-2 mt-3">新增商品</h5>
+    <table class="table table-striped table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th width="5%" scope="col"></th>
+          <th width="30%" scope="col">品項</th>
+          <th width="30%" scope="col">描述</th>
+          <th width="10%" scope="col">價格</th>
+          <th width="10%" scope="col">庫存</th>
+          <th width="15%" scope="col">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td>
+            <input v-model="newItem.name" class="form-control" placeholder="品項名稱" />
+          </td>
+          <td>
+            <input v-model="newItem.description" class="form-control" placeholder="商品描述" />
+          </td>
+          <td>
+            <!-- .number 修飾符（modifier）將輸入的字串轉換為數字類型 -->
+            <input 
+              v-model.number="newItem.price" 
+              class="form-control text-end" 
+              type="number" 
+              placeholder="價格" 
+              min="0"
+            />
+          </td>
+          <td>
+            <input 
+              v-model.number="newItem.stock" 
+              class="form-control text-end" 
+              type="number" 
+              placeholder="庫存" 
+              min="0"
+            />
+          </td>
+          <td>
+            <button class="btn btn-success me-2" @click="addItem">新增</button>
+            <button class="btn btn-outline-secondary" @click="clearForm">清空</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script setup>
@@ -174,7 +187,7 @@ const startEdit = (item) => {
 // 確認編輯狀態
 const confirmEdit = () => {
   if (editingName.value.trim() !== '' &&
-      editingDescription.value.trim() !== '') {
+    editingDescription.value.trim() !== '') {
     editingItem.value.name = editingName.value.trim();
     editingItem.value.description = editingDescription.value.trim();
   }
