@@ -2,17 +2,17 @@
   <table>
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">品項</th>
-        <th scope="col">描述</th>
-        <th scope="col">價格</th>
-        <th scope="col">庫存</th>
-        <th scope="col">操作</th>
+        <th width="5%" scope="col">#</th>
+        <th width="25%" scope="col">品項</th>
+        <th width="25%" scope="col">描述</th>
+        <th width="10%" scope="col">價格</th>
+        <th width="10%" scope="col">庫存</th>
+        <th width="10%" scope="col">操作</th>
       </tr>
     </thead>
     <tbody>
       <tr v-for="(item, index) in items" :key="index">
-        <td>{{ index + 1 }}</td>
+        <td>{{ formatNumber(index + 1) }}</td>
         <td>
           <span v-if="editingItem !== item">
             {{ item.name }}
@@ -23,7 +23,7 @@
         <td>{{ item.price }}</td>
         <td>
           <button @click="decreaseStock(item)">-</button>
-          {{ item.stock }}
+          {{ formatNumber(item.stock) }}
           <button @click="increaseStock(item)">+</button>
         </td>
         <td>
@@ -44,6 +44,11 @@ import { ref } from 'vue';
 // 編輯相關資料狀態
 const editingItem = ref(null);
 const editingName = ref('');
+
+// 數字格式化函數
+const formatNumber = (num) => {
+  return num.toString().padStart(2, '0');
+};
 
 // 開始編輯
 const startEdit = (item) => {
